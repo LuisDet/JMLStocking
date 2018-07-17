@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+        <div class="card-content">
+          <form #clientForm="ngForm" (ngSubmit)="addProduct(clientForm)">
+            <div class="row">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="clientService.selectedClient._id">
+                <div class="input-field col s12">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="clientService.selectedClient.name"
+                  placeholder="ingresa producto">
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" name="price" #price="ngModel" [(ngModel)]="clientService.selectedClient.price"
+                    placeholder="ingresa el precio">
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" name="category" #category="ngModel" [(ngModel)]="clientService.selectedClient.category"
+                    placeholder="ingresa categoria">
+                </div>
+                <div class="input-field col s12">
+                  <input type="text" name="description" #description="ngModel" [(ngModel)]="clientService.selectedClient.description"
+                  placeholder="ingresa una descripcion">
+              </div>
+                <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn">Save</button>
+                    <button class="btn right" (click)="resetForm(clientForm)">Clean</button>
+                  </div>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s7">
+      <table>
+        <thead>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Categoria</th>
+          <th>Descripcion</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of clientService.clients['products']" >
+            <td> {{product.name}} </td>
+            <td> {{product.price}} </td>
+            <td> {{product.category}} </td>
+            <td> {{product.description}} </td>
+            <td><a (click)="editProduct(product)"><i class="material-icons">edit</i></a></td>
+            <td><a (click)="deleteProducto"><i class="material-icons">delete</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
