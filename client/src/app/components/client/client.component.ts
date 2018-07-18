@@ -22,35 +22,46 @@ export class ClientComponent implements OnInit {
   addProduct(form: NgForm) {
     if (form.value._id) {
       this.clientService.putProduct(form.value)
-        .subscribe(res => {
-          console.log(res);
+        .subscribe(data => {
+          this.resetForm(form);
+          M.toast({ html: 'Updated Successfuly' });
+          this.getProduct();
         });
     } else {
       this.clientService.postProduct(form.value).subscribe(data => {
         this.resetForm(form);
-        M.toast({ html: 'Producto Guardado' });
+        M.toast({ html: 'Product Saved' });
         this.getProduct();
       });
     }
   }
 
-    getProduct() {
-      this.clientService.getProducts()
-        .subscribe(res => {
-          this.clientService.clients = res as Client[];
-          console.log(res);
-        });
-    }
+  getProduct() {
+    this.clientService.getProducts()
+      .subscribe(res => {
+        this.clientService.clients = res as Client[];
+        console.log(res);
+      });
+  }
 
-    editProduct(client: Client) {
-      this.clientService.selectedClient = client;
-    }
-    resetForm(form ?: NgForm) {
-      if (form) {
-        form.reset();
-        this.clientService.selectedClient = new Client();
-      }
+  editProduct(client: Client) {
+    this.clientService.selectedClient = client;
+  }
 
+  deleteProduct(_id: string) {
+    if (confirm('Do you want to delete this product?')) {
+    this.clientService.deleteProduct(_id).subscribe(res => {
+      this.getProduct();
+      M.toast({html: 'Deleted Successfuly'});
+    });
+    }
+  }
+  resetForm(form?: NgForm) {
+    if (form) {
+      form.reset();
+      this.clientService.selectedClient = new Client();
     }
 
   }
+
+}

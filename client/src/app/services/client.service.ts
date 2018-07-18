@@ -25,10 +25,10 @@ postProduct(client: Client) {
 }
 
 putProduct(client: Client) {
-  return this.http.put(this.URL_API + `/${client._id}`, Client);
+  return this.http.put(this.URL_API + `/${client._id}`, client);
 }
 
-deleteProduct(_id: String) {
+deleteProduct(_id: string) {
   return this.http.delete(this.URL_API + `/${_id}`);
 }
 }
