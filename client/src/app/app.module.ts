@@ -6,16 +6,20 @@ import { RouterModule, Route } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ClientComponent } from './components/client/client.component';
+import { HomeComponent } from './components/home/home.component';
 
 const route: Route[] = [
   {path: 'client',
-  component: ClientComponent}
+  component: ClientComponent},
+  {path: '',
+  component: HomeComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientComponent
+    ClientComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
